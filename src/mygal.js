@@ -1,5 +1,9 @@
 /**
  * Creates a gallery in an HTML page.
+ * 
+ * It defines the variable mygal, which is an object that has a method init.
+ * 
+ * See the README.md for usage documentation.
  */
 (function(window, undefined) {
 
@@ -20,7 +24,14 @@
                 KEYS[String.fromCharCode(i)] = i;
             }
         })();
-    
+
+        /**
+         * Get the URL hash property for a key.
+         * @function getUrlHashProperty
+         * @param {String} key The URL hash property to get.
+         * @return {String} The value of the property if present, undefined
+         * otherwise.
+         */
         var getUrlHashProperty = function(key) {
             var hashProperties = window.location.hashProperties;
             if (hashProperties === undefined) {
@@ -40,6 +51,12 @@
             return hashProperties[key];
         };
     
+        /**
+         * Sets the URL hash property.
+         * @function setUrlHashProperty
+         * @param {String} key The key of the property.
+         * @param {String} value The value of the property.
+         */
         var setUrlHashProperty = function(key, value) {
             var hashProperties = window.location.hashProperties;
             if (hashProperties === undefined) {
@@ -59,6 +76,11 @@
             window.location.hash = hash;
         };
     
+        /**
+         * Initializes a new gallery.
+         * @function init
+         * @param {Object} options  Optional options.
+         */
         var init = root.init = function(options) {
             var photoIndex;
             var photos;
@@ -66,7 +88,10 @@
             options = $.extend(
                 {
                     navigation: '.navigation',
+                    overview: '.overview',
+                    photoDisplay: '.photo_view .photo',
                     photosSource: './photos.json',
+                    photoSubtitle: '.photo_view .subtitle',
                     thumbnailUrl: function(url) {
                         return 'thumbnail_' + url;
                     },
@@ -76,6 +101,11 @@
                 },
                 options
             );
+
+            var navigation = $(options.navigation);
+            var overview = $(options.overview);
+            var photoDisplay = $(options.photoDisplay);
+            var photoSubtitle = $(options.photoSubtitle);
     
             var preloadPhoto = function(index) {
                 if (index < photos.length) {
@@ -87,17 +117,17 @@
 
             var showPhoto = function(index, fromIndex) {
                 setUrlHashProperty('photoIndex', index);
-                $('.navigation .inactive').removeClass('inactive');
+                navigation.find('.inactive').removeClass('inactive');
                 if (index === 0) {
-                    $('.navigation .nav_previous').addClass('inactive');
+                    navigation.find('.nav_previous').addClass('inactive');
                 }
                 if (index === photos.length-1) {
-                    $('.navigation .nav_next').addClass('inactive');
+                    navigation.find('.nav_next').addClass('inactive');
                 }
-                $('.overview .active_photo').removeClass('active_photo');
-                var activeThumbnail = $('.overview .thumbnail')
+                overview.find('.active_photo').removeClass('active_photo');
+                var activeThumbnail = overview.find('.thumbnail')
                 .slice(index, index+1).addClass('active_photo');
-                var overview = $('.overview').scrollTop(0);
+                overview.scrollTop(0);
                 var top = activeThumbnail.position().top -
                     (overview.height() - activeThumbnail.height())/2;
                 overview.scrollTop(top);
@@ -109,10 +139,10 @@
                     'background-image',
                     'url(' + url + ')'
                 );
-                $('.photo_view .photo').empty().append(img);
-                var subtitle = $('.photo_view .subtitle').empty();
+                photoDisplay.empty().append(img);
+                photoSubtitle.empty();
                 if (photo.subtitle) {
-                    subtitle.text(photo.subtitle);
+                    photoSubtitle.text(photo.subtitle);
                 }
                 preloadPhoto(index+1);
                 photoIndex = index;
@@ -138,7 +168,6 @@
             };
         
             var createOverview = function() {
-                var overview = $('.overview');
                 $.each(photos, function(index, photo) {
                     var url = photo.thumbnail_url ||
                         (options.thumbnailUrl(photo.url));
@@ -173,17 +202,17 @@
             };
         
             var start = function(startIndex) {
-                $('.navigation a').show();
+                navigation.find('a').show();
                 showPhoto(startIndex || 0);
-                $('.navigation .nav_previous')
+                navigation.find('.nav_previous')
                 .click(preventDefaultFn(showPrevious));
-                $('.navigation .nav_next')
+                navigation.find('.nav_next')
                 .click(preventDefaultFn(showNext));
                 $(document).keypress(keyboardHandler);
             };
         
             $.getJSON(options.photosSource, function(data) {
-                $('.navigation a').hide();
+                navigation.find('a').hide();
                 photos = data.photos;
                 createOverview();
                 var startIndex = getUrlHashProperty('photoIndex');
