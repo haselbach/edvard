@@ -1,0 +1,118 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #111;
+}
+
+.frame {
+    width: 1000px;
+    height: 658px;
+    margin: 2px auto;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+    background-color: #EEE;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.overview {
+    float: left;
+    width: 180px;
+    height: 658px;
+    overflow: auto;
+    background-color: #AAA;
+}
+
+.overview .thumbnail {
+    text-align: right;
+    margin: 4px;
+}
+
+.main {
+    margin-left: 180px;
+}
+
+.photo_view: {
+    width: 820px;
+    height: 660px
+}
+
+.photo_img {
+    display: block;
+    width: 820px;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #BBB;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.thumbnail.active_photo img {
+    border-color: #99F;
+}
+
+.thumbnail img {
+    border-style: solid;
+    border-width: 4px;
+    border-color: #222;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    height: 100px;
+}
+
+.navigation {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.navigation {
+    height: 20px;
+}
+
+.navigation a {
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.navigation a.inactive, .navigation a.inactive:hover {
+    color: #999;
+}
+
+.navigation a:hover {
+    color: #22F;
+}
+
+.start {
+    text-align: center;
+    font-size: 30px;
+    padding: 100px 0px;
+    font-family: sans-serif;
+    font-weight: bold;
+    width: 820px;
+    height: 400px;
+    background-color: #BBB;
+    cursor: pointer;
+}
+
+.start_button {
+    border-color: #333;
+    border-style: solid;
+    border-width: 4px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    width: 100px;
+    display: inline-block;
+    background-color: #EEE;
+}
+
