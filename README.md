@@ -1,6 +1,6 @@
-# mygal
-A simple and stupid image gallery. Given some JSON data (that mygal
-loads via AJAX), mygal injects a gallery into the DOM.
+# edvard
+A simple and stupid image gallery. Given some JSON data (that edvard
+loads via AJAX), edvard injects a gallery into the DOM.
 
 ## Usage
 Define the photos that you want to have in the gallery in a file as JSON data.
@@ -26,11 +26,11 @@ Example:
     }
 </code></pre>
 
-Call mygal.init() to inject the gallery.
+Call edvard.init() to inject the gallery.
 
 <pre></code>
     &lt;script type="text/javascript"&gt;
-      $(function() { mygal.init(); });
+      $(function() { edvard.init(); });
     &lt;/script&gt;
 </code></pre>
 
@@ -42,8 +42,8 @@ It will add event handlers to `.navigation .nav_previous` and
 `.navigation .nav_next`.
 
 ## Options
-You can call `mygal.init()` with an optional `options` parameter
-(`mygal.init(options)`). This is an object which can have the following
+You can call `edvard.init()` with an optional `options` parameter
+(`edvard.init(options)`). This is an object which can have the following
 properties:
 
 * `navigation`: The navigation node (default: `'.navigation'`).

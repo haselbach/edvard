@@ -1,13 +1,13 @@
 /**
  * Creates a gallery in an HTML page.
  * 
- * It defines the variable mygal, which is an object that has a method init.
+ * It defines the variable edvard, which is an object that has a method init.
  * 
  * See the README.md for usage documentation.
  */
 (function(window, undefined) {
 
-    var mygal = (function() {
+    var edvard = (function() {
 
         var root = {};
 
@@ -228,7 +228,7 @@
         return root;
     })();
 
-    window.mygal = mygal;
+    window.edvard = edvard;
 
 })(window);
 
